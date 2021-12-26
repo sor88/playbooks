@@ -1,0 +1,3 @@
+  tasks:
+    - name: Installs ansible
+      apt: pkg=puppet state=removed update_cache=true

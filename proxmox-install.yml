@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  remote_user: plus
+  tasks:
+
+  - name: Add source repository into sources list
+    ansible.builtin.apt_repository:
+      repo: deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+      state: present
+      filename: proxmox
+
+  - name: Add repository ceph
+    ansible.builtin.apt_repository:
+      repo: deb http://download.proxmox.com/debian/ceph-octopus bullseye main
+      state: present
+      filename: proxmox
+      update_cache: yes
+
+  
+  - name:
+    apt:
+      name: gnupg
+      state: present
+
+  - name: Add key repository proxmox
+    ansible.builtin.apt_key:
+     url: https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg
+     keyring: /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+
+
+# Istallation
+
+  - name: Install Proxmox-ve
+    apt:
+     name: proxmox-ve
+     state: present
+  - name: Install open-iscsi
+    apt:
+      name: open-iscsi
+      state: present

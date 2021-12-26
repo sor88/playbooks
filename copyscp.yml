@@ -1,0 +1,6 @@
+- hosts: all
+  user: root
+  tasks:
+   - name: Copy file from machine1 to machine2
+     synchronize: src=/home/plus/hdd/tmp/dllx-3807.run dest=/tmp/
+#     delegate_to: arm-rak-linux

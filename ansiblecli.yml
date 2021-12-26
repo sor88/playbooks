@@ -1,0 +1,29 @@
+#absiblecli.yml
+---
+- name: install ansible 
+vars_prompt:
+		hosts: "hosts" #
+		username: "username" #
+
+hosts: $hosts #
+user: $username #
+sudo: true
+accelerate: true  
+tasks:
+    - name: Installs ansible
+      apt: pkg=ansible state=installed update_cache=true
+
+#- hosts: debdoservers
+#- tasks:
+#    - name: check add-apt-repository 
+#      apt: pkg=ansible state=latest update_cache=true
+
+#- hosts: dohyperservers
+#  tasks:
+#    - name: Installs ansible
+#      apt: pkg=ansible state=installed update_cache=true
+
+#- hosts: rpmdoservers
+#  tasks:
+ #   - name: Installs ansible
+ #     yum: pkg=ansible state=installed update_cache=true
