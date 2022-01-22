@@ -1,3 +1,4 @@
+#before you will start this playbook, you need add ip and hostname in /etc/hosts.
 ---
 - hosts: all
   become: yes
@@ -15,6 +16,12 @@
     ansible.builtin.apt_key:
      url: https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg
      keyring: /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+  
+  # - name: Add ip and hostname in /etc/hosts
+  #   lineinfile:
+  #     path: /etc/hosts
+      # line: "192.168.1.109 homepve"
+
 
   # - name: Add key repository proxmox
   #   ansible.builtin.apt_key:
@@ -47,7 +54,12 @@
     apt:
      name: proxmox-ve
      state: present
+
   - name: Install open-iscsi
     apt:
       name: open-iscsi
+      state: present
+  - name: Install openvswitch-switch
+    apt:
+      name: openvswitch-switch
       state: present
